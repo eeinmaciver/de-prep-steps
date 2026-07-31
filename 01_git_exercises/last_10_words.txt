@@ -1,0 +1,11 @@
+tail -10 word_list.txt
+zymotoxic
+zymurgy
+Zyrenian
+Zyrian
+Zyryan
+zythem
+Zythia
+zythum
+Zyzomys
+Zyzzogeton
