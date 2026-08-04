@@ -382,7 +382,7 @@ def flatten_list_by_one(nested_lists):
 
 @run_test
 def flatten_list_by_one_should_remove_single_layer_of_nesting():
-    assert flatten_list_by_one([[1], [2]]) == [1, 2], format_err_msg(
+    assert flatten_list_by_one([[1], [2]]) == [1, 2], format_err_msg(  
         [1, 2], flatten_list_by_one([[1], [2]])
     )
 
