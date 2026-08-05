@@ -11,8 +11,11 @@ from test_api.checks import run_test, skip_test, format_err_msg
 # Challenge 0
 # This function should take a list as an argument and return True if the list
 #  is empty, False otherwise.
-def is_empty_list():
-    pass
+def is_empty_list(x):
+    if not x:
+        return True
+    else:
+        return False
 
 
 @run_test
@@ -40,11 +43,16 @@ def test_is_empty_list():
 
 # If the 'likes_to_code' key is false, the string should look like
 #   "My name is Mitch and I don't like to code."
-def create_profile_description():
-    pass
+def create_profile_description(x):
+
+    if x['likes_to_code']:
+        return f"My name is {x['name']} and I like to code."
+    else:
+        return f"My name is {x['name']} and I don't like to code."
 
 
-@skip_test
+
+@run_test
 def test_create_profile_description():
     assert (
         create_profile_description({"name": "Danika", "likes_to_code": True})
@@ -70,11 +78,23 @@ def test_create_profile_description():
 # You should return a corresponding message
 
 
-def read_traffic_light():
-    pass
+def read_traffic_light(light):
 
+    messages = {
+        'green': 'GO!',
+        'amber': 'GET READY...',
+        'red': 'STOP!'
+    }
 
-@skip_test
+    message = messages.get(light.lower())
+
+    if light.isupper():
+        return message
+    elif light.islower():
+        return message
+    
+
+@run_test
 def test_read_traffic_light():
     assert read_traffic_light("green") == "GO!", format_err_msg(
         "GO!", read_traffic_light("green")
@@ -101,11 +121,11 @@ def test_read_traffic_light():
 # Challenge 3
 # This function should take any number of arguments and return the number of
 #  arguments passed into the function
-def how_many_arguments():
-    pass
+def how_many_arguments(*args):
+    return len(args)
 
 
-@skip_test
+@run_test
 def test_how_many_arguments():
     assert how_many_arguments("a", "b", "c") == 3, format_err_msg(
         3, how_many_arguments("a", "b", "c")
@@ -134,11 +154,14 @@ def test_how_many_arguments():
 
 # You should 'add the provided coin to the machine by altering the associated
 #  key and returning the updated coin machine
-def update_coin_machine():
-    pass
+def update_coin_machine(coin_machine, coin):
 
+    coin_machine[coin] += 1
 
-@skip_test
+    return coin_machine
+    
+
+@run_test
 def test_update_coin_machine():
     assert update_coin_machine({"1p": 0, "2p": 0, "5p": 0, "10p": 0}, "1p") == {
         "1p": 1,
@@ -203,11 +226,25 @@ def test_update_coin_machine():
 # If the direction is "right" it should move 1 unit right
 #   (+1 in the x direction)
 # If the direction is "left" it should move 1 unit left (-1 in the x direction)
-def update_position():
-    pass
+def update_position(coords, direction):
+
+    x = coords[0]
+    y = coords[1]
+
+    if direction == 'up':
+        y += 1
+    elif direction == 'down':
+        y -= 1
+    elif direction == 'right':
+        x += 1
+    elif direction == 'left':
+        x -= 1
+
+    return [x, y]
+    
 
 
-@skip_test
+@run_test
 def test_update_position():
     assert update_position([10, 10], "up") == [10, 11], format_err_msg(
         [10, 11], update_position([10, 10], "up")
@@ -229,11 +266,16 @@ def test_update_position():
 # Challenge 6
 # This function should take any value as an argument, and return true if it is
 #  falsy, and false otherwise
-def is_falsy():
-    pass
+def is_falsy(cerebral_falsy):
+
+    if not cerebral_falsy:
+        return True
+    else:
+        return False
+    
 
 
-@skip_test
+@run_test
 def test_is_falsy():
     assert is_falsy(False) is True, format_err_msg(True, is_falsy(False))
     assert is_falsy(True) is False, format_err_msg(False, is_falsy(True))
@@ -254,11 +296,15 @@ def test_is_falsy():
 # The game is considered to be won if the dice roll is 3 or higher AND the
 #  coin toss is "H"
 # You should return True if the game has been won and False otherwise
-def check_game():
-    pass
+def check_game(dice_roll, coin_toss):
+
+    if dice_roll >= 3 and coin_toss == 'H':
+        return True
+    else:
+        return False
 
 
-@skip_test
+@run_test
 def test_check_game():
     assert check_game(3, "H") is True, format_err_msg(True, check_game(3, "H"))
     assert check_game(4, "H") is True, format_err_msg(True, check_game(4, "H"))
@@ -276,11 +322,27 @@ def test_check_game():
 # This should take two arguments, a coin collection list and a
 #   string representing a coin, and return an updated version of the given
 #   list with the coin added at the appropriate position
-def add_coins():
-    pass
+def add_coins(collection, coin):
+
+    one_pence = collection[0]
+    two_pence = collection[1]
+    five_pence = collection[2]
+    ten_pence = collection[3]
+
+    if coin == '1p':
+        one_pence.append(coin)
+    elif coin == '2p':
+        two_pence.append(coin)
+    if coin == '5p':
+        five_pence.append(coin)
+    elif coin == '10p':
+        ten_pence.append(coin)
+
+    return collection
 
 
-@skip_test
+
+@run_test
 def test_add_coins():
     assert add_coins([[], [], [], []], "1p") == [["1p"], [], [], []], format_err_msg(
         [["1p"], [], [], []], add_coins([[], [], [], []], "1p")
