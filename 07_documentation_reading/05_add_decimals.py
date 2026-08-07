@@ -1,10 +1,11 @@
 import os
 import sys
-
+from decimal import *
 sys.path.append(os.getcwd())
 
 from test_api.checks import run_test, format_err_msg
 # DO NOT CHANGE CODE ABOVE THIS LINE
+
 
 
 def add_decimals(fractions_to_add):
@@ -25,8 +26,16 @@ def add_decimals(fractions_to_add):
     Python provides a decimal module that doesn't use floats and can be used to perform decimal arithmetic accurately:
     https://docs.python.org/3/library/decimal.html#module-decimal
     """
+
+    getcontext().prec = 1
     
-    pass
+    num_list = []
+
+    for frac in fractions_to_add:
+        num_list.append(Decimal(frac))
+
+    
+    return str(sum(num_list))
 
 
 @run_test

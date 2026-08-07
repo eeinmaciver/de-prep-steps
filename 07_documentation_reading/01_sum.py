@@ -17,7 +17,12 @@ def calculate_price_percentage(percentage_changes):
     https://docs.python.org/3/library/functions.html#sum
     """
 
-    pass
+
+
+    total_percent = sum(percentage_changes)
+
+    return 100 + total_percent
+
 
 
 @run_test
