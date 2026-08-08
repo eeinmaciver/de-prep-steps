@@ -1,5 +1,6 @@
 import os
 import sys
+import re
 
 sys.path.append(os.getcwd())
 
@@ -19,8 +20,12 @@ def convert_to_title_case(sentence):
     
     Use their suggestions to complete your function.
     """
-    
-    return sentence.capwords()
+
+    return re.sub(
+        r"[A-Za-z]+(?:['-][A-Za-z]+)*",
+        lambda match: match.group(0)[0].upper() + match.group(0)[1:].lower(),
+        sentence
+    )
 
 
 @run_test
