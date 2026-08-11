@@ -32,7 +32,16 @@ is_valid_mobile_number('0712345678!') # returns False
 
 
 def is_valid_mobile_number(mobile_number):
-    pass
+
+    if mobile_number[:-9] == '07' and len(mobile_number) == 11 and mobile_number[-9:].isdigit():
+        return True
+    elif mobile_number[:-9] == '+447' and len(mobile_number) == 13 and mobile_number[-9:].isdigit():
+        return True
+    elif mobile_number[:-9] == '00447' and len(mobile_number) == 14 and mobile_number[-9:].isdigit():
+        return True
+    else:
+        return False
+
 
 
 @run_test
@@ -156,52 +165,59 @@ sum_digits_from_string('northcoders') # returns 0
 
 
 def sum_digits_from_string(string):
-    pass
+
+    number_list = []
+
+    for strin in string:
+        if strin.isdigit():
+            number_list.append(int(strin))
+
+    return sum(number_list)
 
 
-@skip_test
+@run_test
 def sum_digits_from_string_should_return_0_for_empty_string():
     result = sum_digits_from_string("")
     expected = 0
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def sum_digits_from_string_should_return_0_for_non_numeric_string():
     result = sum_digits_from_string("a")
     expected = 0
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def sum_digits_from_string_should_return_integer_for_single_digit():
     result = sum_digits_from_string("5")
     expected = 5
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def sum_digits_from_string_should_return_sum_for_two_digits():
     result = sum_digits_from_string("16")
     expected = 7
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def sum_digits_from_string_should_return_sum_for_three_digits():
     result = sum_digits_from_string("255")
     expected = 12
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def sum_digits_from_string_should_return_sum_for_mixed_string():
     result = sum_digits_from_string("he12ll3")
     expected = 6
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def sum_digits_from_string_should_return_0_for_no_numbers():
     result = sum_digits_from_string("northcoders")
     expected = 0
@@ -230,44 +246,45 @@ get_williams(['William David', 'Cole Williamson']) # returns []
 
 def get_williams(names):
     pass
+    
 
 
-@skip_test
+@run_test
 def get_williams_should_return_empty_list_for_empty_list():
     result = get_williams([])
     expected = []
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_williams_should_return_empty_list_for_single_invalid_item():
     result = get_williams(["Kirsty February"])
     expected = []
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_williams_should_return_single_valid_item():
     result = get_williams(["David Williams"])
     expected = ["David Williams"]
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_williams_should_return_several_valid_items():
     result = get_williams(["David Williams", "Sarah Williams"])
     expected = ["David Williams", "Sarah Williams"]
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_williams_should_return_mixed_items():
     result = get_williams(["Kirsty February", "Sam Williams"])
     expected = ["Sam Williams"]
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_williams_should_return_empty_list_for_mixed_items_with_rogue_williams():
     result = get_williams(["William David", "Cole Williamson"])
     expected = []
