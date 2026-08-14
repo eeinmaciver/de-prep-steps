@@ -22,7 +22,17 @@ valid_triangles([[5, 4, 5]]) returns 1
 
 
 def valid_triangles(triangles):
-    pass
+
+    tri_count = 0
+
+    for tri in triangles:
+        a, b, c = tri
+        if a + b > c and a + c > b and b + c > a:
+            tri_count += 1
+        else:
+            pass
+
+    return tri_count
 
 
 @run_test
@@ -30,21 +40,21 @@ def test_valid_triangles_returns_0_when_passed_no_triangles():
     assert valid_triangles([]) == 0, format_err_msg(0, valid_triangles([]))
 
 
-@skip_test
+@run_test
 def test_valid_triangles_returns_0_when_passed_a_list_with_no_valid_triangles():
     assert valid_triangles([[5, 10, 25]]) == 0, format_err_msg(
         0, valid_triangles([[5, 10, 25]])
     )
 
 
-@skip_test
+@run_test
 def test_valid_triangles_returns_1_when_passed_a_list_with_a_single_valid_triangle():
     assert valid_triangles([[5, 4, 5]]) == 1, format_err_msg(
         1, valid_triangles([[5, 4, 5]])
     )
 
 
-@skip_test
+@run_test
 def test_valid_triangles_returns_2_when_passed_a_list_with_2_valid_and_1_invalid_triangle():
     assert (
         valid_triangles([[5, 10, 25], [5, 4, 5], [542, 586, 419]]) == 2
@@ -72,7 +82,20 @@ So if you could do that you'd really be saving them a lot of work. Thanks.
 
 
 def counter_spy(people):
-    pass
+
+    not_a_spy = []
+
+    for ppl in people:
+        ppl = ppl.lower()
+        #if 's' not in ppl and 'p' not in ppl and 'y' not in ppl:
+        if not any(letter in ppl for letter in 'spy'):
+            not_a_spy.append(ppl.title())
+        else:
+            pass
+
+    return sorted(not_a_spy)
+
+
 
 
 @run_test
@@ -82,7 +105,7 @@ def test_counter_spy_returns_an_empty_list_if_the_only_person_is_a_spy():
     )
 
 
-@skip_test
+@run_test
 def test_counter_spy_returns_a_list_with_all_spies_removed():
     assert counter_spy(["Simon", "Cat", "Kyle"]) == ["Cat"], format_err_msg(
         ["Cat"], counter_spy(["Simon", "Cat", "Kyle"])
@@ -98,7 +121,7 @@ def test_counter_spy_returns_a_list_with_all_spies_removed():
     )
 
 
-@skip_test
+@run_test
 def test_counter_spy_returns_a_list_with_names_in_alphabetical_order():
     assert counter_spy(["Simon", "Cat", "Kyle", "Danika", "Alex", "Chon"]) == [
         "Alex",
@@ -120,8 +143,32 @@ This function should return the time written in the 12-hour clock format
 
 
 def convert_time_string(sample_string):
-    pass
 
+    hour = int(sample_string[:2])
+    minute = sample_string[3:]
+
+    if hour >= 13:
+        hour -= 12
+    elif hour == 0:
+        hour += 12
+
+    hour = str(hour)
+
+    if len(hour) == 1:
+        hour = '0' + hour
+
+    twelve_hour_time = hour + ':' + minute
+
+    return twelve_hour_time
+
+
+#        sample = sample_string[:2] + sample_string[4:]
+#
+ #       if int(sample) >= 1300:
+  #          int_sample = sample - 1200
+   #         return str(int_sample[:1] + ':' + int_sample[2:])
+    #    else:
+    #        return sample_string
 
 @run_test
 def test_convert_time_string_returns_the_string_unchanged_if_already_within_the_right_format():
@@ -130,14 +177,14 @@ def test_convert_time_string_returns_the_string_unchanged_if_already_within_the_
     )
 
 
-@skip_test
+@run_test
 def test_convert_time_string_converts_an_afternoon_time_to_the_12_hour_format():
     assert convert_time_string("16:07") == "04:07", format_err_msg(
         "04:07", convert_time_string("16:07")
     )
 
 
-@skip_test
+@run_test
 def test_convert_time_string_converts_times_in_the_hour_after_midnight_to_the_12_hour_format():
     assert convert_time_string("00:56") == "12:56", format_err_msg(
         "12:56", convert_time_string("00:56")
@@ -161,7 +208,17 @@ get_palindromes(["pineapple", "pony", "racecar"]) returns ["racecar"]
 
 
 def get_palindromes(word_list):
-    pass
+
+    palindrome_list = []
+
+    for word in word_list:
+        if word == word[::-1]:
+            palindrome_list.append(word)
+        else:
+            pass
+
+    return palindrome_list
+
 
 
 @run_test
@@ -169,7 +226,7 @@ def test_get_palindromes_returns_empty_list_when_passed_empty_list():
     assert get_palindromes([]) == [], format_err_msg([], get_palindromes([]))
 
 
-@skip_test
+@run_test
 def test_get_palindromes_identifies_palindromes():
     assert get_palindromes(["racecar"]) == ["racecar"], format_err_msg(
         ["racecar"], get_palindromes(["racecar"])
@@ -182,7 +239,7 @@ def test_get_palindromes_identifies_palindromes():
     )
 
 
-@skip_test
+@run_test
 def test_get_palindromes_ignores_non_palindromes():
     assert get_palindromes(["racecar", "kayak", "tacocat"]) == [
         "racecar",
@@ -199,7 +256,7 @@ def test_get_palindromes_ignores_non_palindromes():
     )
 
 
-@skip_test
+@run_test
 def test_get_palindromes_returns_empty_list_when_passed_no_palindromes():
     assert (
         get_palindromes(["pineapple", "watermelon", "pony"]) == []
