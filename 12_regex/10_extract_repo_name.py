@@ -23,7 +23,10 @@ def extract_repo_name(text):
     where "northcoders" is the name of the account and "de-intro-regex" is the
     name of the repo
     """
-    pass
+    address = re.compile(r'https://github\.com/[\w-]+/([\w-]+)')
+    address_search = address.search(text)
+
+    return address_search.group(1)
 
 
 @run_test

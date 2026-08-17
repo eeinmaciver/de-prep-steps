@@ -46,7 +46,7 @@ def test_spot_the_contraction_returns_true_when_contraction_spotted():
             "I've got a collection of foreign coins"))
 
 
-@skip_test
+@run_test
 def test_spot_the_contraction_returns_false_when_contraction_not_spotted():
     assert not spot_the_contraction("do not"), \
         format_err_msg(False, spot_the_contraction("do not"))

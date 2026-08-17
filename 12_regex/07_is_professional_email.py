@@ -23,8 +23,13 @@ def is_professional_email(text):
 
     You should return True if the email is professional, and False otherwise
     """
-    pass
+    email_check = re.compile('x$', re.IGNORECASE)
+    email_match = email_check.search(text)
 
+    if email_match:
+        return False
+    else:
+        return True
 
 @run_test
 def test_returns_true_if_email_is_professional():
@@ -34,7 +39,7 @@ def test_returns_true_if_email_is_professional():
         format_err_msg(True, is_professional_email("Dear Alex, How are you?"))
 
 
-@skip_test
+@run_test
 def test_returns_false_if_email_ends_with_x():
     assert not is_professional_email("x"), \
         format_err_msg(False, is_professional_email("x"))

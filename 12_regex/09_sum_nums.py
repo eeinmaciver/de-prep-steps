@@ -23,7 +23,15 @@ def sum_nums(text):
 
     If there are no numbers, you should return 0
     """
-    pass
+
+    num_check = re.compile(r'\d+')
+    num_search = num_check.findall(text)
+    num_list = []
+
+    for number in num_search:
+        num_list.append(int(number))
+
+    return sum(num_list)
 
 
 @run_test
