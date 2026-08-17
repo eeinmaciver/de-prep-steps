@@ -24,7 +24,11 @@ def extract_code(text):
     You should extract that number from the string and return it as
     an integer
     """
-    pass
+
+    text_numbers = re.compile(r'\d+')
+    look_for_numbers = text_numbers.search(text)
+
+    return int(look_for_numbers.group())
 
 
 @run_test
