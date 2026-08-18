@@ -33,7 +33,15 @@ def spot_the_contraction(text):
     - "Sometimes I don't like to get up early" True
     - "Don't feed the birds" True
     """
-    pass
+
+
+    word_check = re.compile(r'i\'m|i\'ve|don\'t', re.IGNORECASE)
+    word_search = word_check.search(text)
+
+    if word_search:
+        return True
+    else:
+        return False
 
 
 @run_test

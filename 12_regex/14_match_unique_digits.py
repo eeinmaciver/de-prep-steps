@@ -26,7 +26,14 @@ def match_unique_digits(text):
     - 493710 True
     - 00 False
     """
-    pass
+
+    num_check = re.compile(r'(\d).*\1')
+    num_search = num_check.search(text)
+
+    if num_search:
+        return False
+    else:
+        return True
 
 
 @run_test
