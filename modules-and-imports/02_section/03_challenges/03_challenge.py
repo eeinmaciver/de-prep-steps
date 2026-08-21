@@ -1,5 +1,6 @@
 # ADD YOUR IMPORTS HERE
-
+import matplotlib.pyplot as pyplot
+import numpy as numpy
 
 # PLEASE DO NOT MAKE CHANGES BELOW THIS LINE
 

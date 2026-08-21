@@ -1,6 +1,7 @@
-import sys
+#import sys
 # MAKE YOUR CHANGES TO `sys.path` HERE
-
+#sys.path.append('modules-and-imports/examples')
+#sys.path.append('modules-and-imports/01_section/04_challenge/data/nested_data')
 
 # PLEASE DO NOT MAKE CHANGES BELOW THIS LINE
 
